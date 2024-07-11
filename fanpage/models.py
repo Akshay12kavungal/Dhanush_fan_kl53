@@ -13,7 +13,15 @@ class Movie(models.Model):
     def __str__(self):
         return self.title
     
+class MovieList(models.Model):
+    title = models.CharField(max_length=200)
+    year=models.DateField()
+    description = models.TextField(blank=False)
+    image = models.ImageField(upload_to='movie_lists/', blank=True, null=True)
 
+    def __str__(self):
+        return self.title
+    
 class NewsArticle(models.Model):
     title=models.CharField(max_length=200)
     publication_date=models.DateField()
@@ -50,3 +58,22 @@ class Comment(models.Model):
 
     def __str__(self):
         return f"{self.author} - {self.created_date}"
+
+
+class Biography(models.Model):
+    title = models.CharField(max_length=200)
+    content = models.TextField()
+
+class Filmography(models.Model):
+    year = models.IntegerField()
+    title = models.CharField(max_length=200)
+    role = models.CharField(max_length=200)
+    description = models.TextField()
+
+class Award(models.Model):
+    title = models.CharField(max_length=200)
+    description = models.TextField()
+
+class RelatedLinks(models.Model):
+    title = models.CharField(max_length=200)
+    url = models.URLField()

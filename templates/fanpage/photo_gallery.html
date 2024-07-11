@@ -1,15 +1,24 @@
 {% extends 'fanpage/base.html' %}
 
-{% block title %}Photo Gallery{% endblock %}
+{% block title %}Photo Gallery - Dhanush Fan KL53{% endblock %}
 
 {% block content %}
-<h1>Photo Gallery</h1>
-<div class="row">
-    {% for photo in photos %}
-    <div class="col-md-4">
-        <img src="{{ photo.image.url }}" alt="{{ photo.title }}" class="img-fluid">
-        <p>{{ photo.title }} - {{ photo.description }}</p>
+<div class="container mt-4">
+    <h2>Photo Gallery</h2>
+    <div class="row">
+        {% for photo in photos %}
+        <div class="col-md-4 mb-4">
+            <div class="card h-100">
+                <img src="{{ photo.image.url }}" class="card-img-top" alt="{{ photo.title }}" style="height: 300px; object-fit: cover;">
+            </div>
+        </div>
+        {% empty %}
+        <div class="col-md-12">
+            <div class="alert alert-info" role="alert">
+                No photos available at the moment.
+            </div>
+        </div>
+        {% endfor %}
     </div>
-    {% endfor %}
 </div>
 {% endblock %}

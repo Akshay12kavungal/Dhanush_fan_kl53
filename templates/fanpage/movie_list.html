@@ -1,0 +1,37 @@
+
+
+
+{% extends 'fanpage/base.html' %}
+
+{% block title %}Movie List - Dhanush Fan KL53{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Movie List</h2>
+    <div class="row">
+        {% for movie_list in movie_lists %}
+        <div class="col-md-4 mb-4">
+            <div class="card h-100">
+                {% if movie_list.image %}
+                <img src="{{ movie_list.image.url }}" class="card-img-top" alt="{{ movie_list.title }}" style="height: 400px; object-fit: cover;">
+                {% else %}
+                <div class="card-img-top bg-secondary" style="height: 300px;"></div>
+                {% endif %}
+                <div class="card-body">
+                    <h5 class="card-title">{{ movie_list.title }}</h5>
+                    <p class="card-text">{{ movie_list.description }}</p>
+                    <p class="card-text"><strong>Release Date:</strong> {{ movie_list.year }}</p>
+                   
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="col-md-12">
+            <div class="alert alert-info" role="alert">
+                No movies available at the moment.
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

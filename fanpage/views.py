@@ -1,20 +1,41 @@
 from django.utils import timezone 
 from django.shortcuts import redirect, render
 
-from .models import Movie, NewsArticle,Photo, Video, Comment
+from .models import Award, Biography, Filmography, Movie, MovieList, NewsArticle,Photo, RelatedLinks, Video, Comment
 
 # Create your views here.
 
 
 def home(request):
-    latest_movies=Movie.objects.order_by('-release_date')[:5]
-    recent_news=NewsArticle.objects.order_by('-publication_date')[:5]
+ 
+    biography = Biography.objects.first()
 
-    context={'latest_movies':latest_movies,
-             'recent_news':recent_news,
-             }
+    filmography = Filmography.objects.all().order_by('year')
+    
+    awards = Award.objects.all()
+    
+    related_links = RelatedLinks.objects.all()
+    
+    latest_movies = Movie.objects.order_by('-release_date')[:5]
+    
+    recent_news = NewsArticle.objects.order_by('-publication_date')[:5]
+    
+    context = {
+        'biography': biography,
+        'filmography': filmography,
+        'awards': awards,
+        'related_links': related_links,
+        'latest_movies': latest_movies,
+        'recent_news': recent_news,
+    }
+    return render(request, 'fanpage/home.html', context)
 
-    return render(request,'fanpage/home.html',context)
+def movie_list(request):
+    movie_lists = MovieList.objects.all()
+    context = {
+        'movie_lists': movie_lists
+    }
+    return render(request, 'fanpage/movie_list.html', context)
 
 def movie_detail(request,pk):
     movie=Movie.objects.get(pk=pk)

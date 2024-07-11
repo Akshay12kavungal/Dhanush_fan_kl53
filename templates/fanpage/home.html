@@ -1,37 +1,121 @@
 {% extends 'fanpage/base.html' %}
 
 {% block title %}Home{% endblock %}
+{% load static %}
+
+{% block extra_css %}
+<style>
+    .card-img-top {
+        height: 300px; /* Fixed height for movie posters */
+        object-fit: cover; /* Cover the entire area of the card */
+    }
+    .card-body {
+        background-color: #f8f9fa; /* Light gray background for card body */
+    }
+    .card-title {
+        font-size: 1.25rem; /* Larger font size for movie title */
+    }
+    .card-text {
+        font-size: 0.875rem; /* Smaller font size for release date */
+    }
+    .btn-primary {
+        width: 100%; /* Make button stretch across card body */
+    }
+</style>
+{% endblock %}
 
 {% block content %}
-<div class="container">
+<div class="container mt-4">
+    <h1 class="mb-4">Welcome to Dhanush Fan KL53</h1>
+    
+    <!-- About Dhanush Section -->
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <img src="{% static 'images/dhanush2.jpg' %}" class="img-fluid rounded" alt="Dhanush Photo">
+        </div>
+        <div class="col-md-6">
+            <h2>About Dhanush</h2>
+            <p class="lead">{{ biography.content }}</p>
+        </div>
+    </div>
+
+    <!-- Latest Movies Section -->
+    <h2>Latest Movies</h2>
     <div class="row">
-        <div class="col-md-8">
-            <h1 class="mt-4 mb-4">Welcome to Dhanush Fan KL53</h1>
-            <h2>Latest Movies</h2>
-            <div class="list-group">
-                {% for movie in latest_movies %}
-                <a href="{% url 'movie_detail' movie.pk %}" class="list-group-item list-group-item-action">
-                    <h5 class="mb-1">{{ movie.title }}</h5>
-                    <p class="mb-1">Release Date: {{ movie.release_date }}</p>
-                </a>
-                {% empty %}
-                <p>No movies available.</p>
-                {% endfor %}
-            </div>
-        </div>
-        <div class="col-md-4">
-            <h2 class="mt-4">About Dhanush</h2>
-            <p class="lead">Dhanush is a renowned actor and singer in the Indian film industry. He has garnered acclaim for his versatile performances in various roles.</p>
-            
-            <h2 class="mt-4">Photos of Dhanush</h2>
-            <div class="row">
-                {% for photo in dhanush_photos %}
-                <div class="col-md-6 mb-4">
-                    <img src="{{ photos.image.url }}" class="img-fluid rounded" alt="{{ photo.title }}">
+        {% for movie in latest_movies %}
+        <div class="col-md-4 mb-4">
+            <div class="card h-100">
+                {% if movie.poster %}
+                <img src="{{ movie.poster.url }}" class="card-img-top" alt="{{ movie.title }}">
+                {% else %}
+                <div class="card-img-top bg-secondary" style="height: 300px;"></div>
+                {% endif %}
+                <div class="card-body">
+                    <h5 class="card-title">{{ movie.title }}</h5>
+                    <p class="card-text">{{ movie.description }}</p>
+                    <p class="card-text"><strong>Release Date:</strong> {{ movie.release_date }}</p>
+                    <a href="{% url 'movie_detail' movie.pk %}" class="btn btn-primary stretched-link">View Movie</a>
                 </div>
-                {% endfor %}
             </div>
         </div>
+        {% empty %}
+        <div class="col-md-4 mb-4">
+            <div class="card h-100">
+                <div class="card-img-top bg-secondary" style="height: 300px;"></div>
+                <div class="card-body">
+                    <h5 class="card-title">No movies available</h5>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- Filmography Section -->
+    <h2>Filmography</h2>
+    <ul class="list-group mb-4">
+        {% for film in filmography %}
+        <li class="list-group-item">
+            <strong>{{ film.year }}</strong>: {{ film.movie }} as {{ film.role }}
+        </li>
+        {% empty %}
+        <li class="list-group-item">No films listed</li>
+        {% endfor %}
+    </ul>
+
+    <!-- Awards Section -->
+    <h2>Awards and Recognition</h2>
+    <ul class="list-group mb-4">
+        {% for award in awards %}
+        <li class="list-group-item">{{ award.title }}</li>
+        {% empty %}
+        <li class="list-group-item">No awards listed</li>
+        {% endfor %}
+    </ul>
+
+    <!-- Related Links Section -->
+    <h2>Related Links</h2>
+    <ul class="list-group mb-4">
+        {% for link in related_links %}
+        <li class="list-group-item">
+            <a href="{{ link.url }}" target="_blank">{{ link.title }}</a>
+        </li>
+        {% empty %}
+        <li class="list-group-item">No related links available</li>
+        {% endfor %}
+    </ul>
+
+    <!-- Recent News Section -->
+    <h2>Recent News</h2>
+    <div class="list-group">
+        {% for article in recent_news %}
+        <a href="{% url 'news_list' %}" class="list-group-item list-group-item-action">
+            <h5 class="mb-1">{{ article.title }}</h5>
+            <p class="mb-1">Published on: {{ article.publication_date }}</p>
+            <p>{{ article.summary }}</p>
+        </a>
+        {% empty %}
+        <p>No news available.</p>
+        {% endfor %}
     </div>
 </div>
 {% endblock %}

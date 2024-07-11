@@ -1,0 +1,15 @@
+{% extends 'fanpage/base.html' %}
+
+{% block title %}News{% endblock %}
+
+{% block content %}
+<h1>News</h1>
+<ul>
+    {% for article in news_articles %}
+    <li>
+        {{ article.title }} - {{ article.publication_date }} <br> {{ article.summary }}
+        <a href="{{ article.read_more_link }}" class="btn btn-link">Read more</a>
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}

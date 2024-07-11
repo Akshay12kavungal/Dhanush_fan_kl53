@@ -1,0 +1,37 @@
+{% extends 'fanpage/base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <h1 class="mt-4 mb-4">Welcome to Dhanush Fan KL53</h1>
+            <h2>Latest Movies</h2>
+            <div class="list-group">
+                {% for movie in latest_movies %}
+                <a href="{% url 'movie_detail' movie.pk %}" class="list-group-item list-group-item-action">
+                    <h5 class="mb-1">{{ movie.title }}</h5>
+                    <p class="mb-1">Release Date: {{ movie.release_date }}</p>
+                </a>
+                {% empty %}
+                <p>No movies available.</p>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="col-md-4">
+            <h2 class="mt-4">About Dhanush</h2>
+            <p class="lead">Dhanush is a renowned actor and singer in the Indian film industry. He has garnered acclaim for his versatile performances in various roles.</p>
+            
+            <h2 class="mt-4">Photos of Dhanush</h2>
+            <div class="row">
+                {% for photo in dhanush_photos %}
+                <div class="col-md-6 mb-4">
+                    <img src="{{ photos.image.url }}" class="img-fluid rounded" alt="{{ photo.title }}">
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

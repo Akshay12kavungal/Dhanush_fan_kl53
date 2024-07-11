@@ -1,0 +1,11 @@
+{% extends 'fanpage/base.html' %}
+
+{% block title %}{{ movie.title }}{% endblock %}
+
+{% block content %}
+<h1>{{ movie.title }}</h1>
+<p>Release Date: {{ movie.release_date }}</p>
+<img src="{{ movie.poster.url }}" alt="{{ movie.title }}" class="img-fluid">
+<p>{{ movie.description }}</p>
+<a href="{{ movie.trailer_link }}" class="btn btn-primary">Watch Trailer</a>
+{% endblock %}

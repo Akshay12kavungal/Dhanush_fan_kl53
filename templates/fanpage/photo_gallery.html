@@ -1,0 +1,15 @@
+{% extends 'fanpage/base.html' %}
+
+{% block title %}Photo Gallery{% endblock %}
+
+{% block content %}
+<h1>Photo Gallery</h1>
+<div class="row">
+    {% for photo in photos %}
+    <div class="col-md-4">
+        <img src="{{ photo.image.url }}" alt="{{ photo.title }}" class="img-fluid">
+        <p>{{ photo.title }} - {{ photo.description }}</p>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

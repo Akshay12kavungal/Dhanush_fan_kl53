@@ -1,0 +1,15 @@
+{% extends 'fanpage/base.html' %}
+
+{% block title %}Video Gallery{% endblock %}
+
+{% block content %}
+<h1>Video Gallery</h1>
+<ul>
+    {% for video in videos %}
+    <li>
+        <a href="{{ video.video_link }}">{{ video.title }}</a>
+        <p>{{ video.description }}</p>
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}

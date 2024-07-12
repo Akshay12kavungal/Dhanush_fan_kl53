@@ -59,10 +59,21 @@ class Comment(models.Model):
     def __str__(self):
         return f"{self.author} - {self.created_date}"
 
-
 class Biography(models.Model):
-    title = models.CharField(max_length=200)
-    content = models.TextField()
+    title = models.CharField(max_length=200, default='Biography of Dhanush')
+    about = models.TextField(default='About Dhanush content here.')
+    early_life = models.TextField(default='Early life content here.')
+    personal_life = models.TextField(default='Personal life content here.')
+    movie_career_actor = models.TextField(default='Movie career as an actor content here.')
+    movie_career_producer = models.TextField(default='Movie career as a producer content here.')
+    movie_career_director = models.TextField(default='Movie career as a director content here.')
+    image = models.ImageField(upload_to='Biography/', default='default_biography_image.jpg')
+
+    def __str__(self):
+        return self.title
+
+
+
 
 class Filmography(models.Model):
     year = models.IntegerField()

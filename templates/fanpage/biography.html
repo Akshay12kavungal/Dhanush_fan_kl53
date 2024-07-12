@@ -1,0 +1,63 @@
+{% extends 'fanpage/base.html' %}
+
+{% block title %}Biography{% endblock %}
+{%load static%}
+
+{% block content %}
+<div class="container mt-4">
+    <h1>Biography of Dhanush</h1>
+    
+    <!-- Image Section -->
+    <div class="row mb-4">
+        <div class="col-md-6">
+            {% if biography.image %}
+            <img src="{{ biography.image.url }}" class="img-fluid rounded" alt="Dhanush Photo">
+            {% else %}
+            <img src="{% static 'images/default_profile.png' %}" class="img-fluid rounded" alt="Default Profile">
+            {% endif %}
+        </div>
+        <div class="col-md-6">
+            <p class="lead">{{ biography.about }}</p>
+        </div>
+    </div>
+
+    <!-- Biography Sections -->
+    <h2>Early Life</h2>
+    <div class="row mb-4">
+        <div class="col-md-12">
+            <p class="lead">{{ biography.early_life }}</p>
+        </div>
+    </div>
+
+    <h2>Personal Life</h2>
+    <div class="row mb-4">
+        <div class="col-md-12">
+            <p class="lead">{{ biography.personal_life }}</p>
+        </div>
+    </div>
+
+    <h2>Movie Career</h2>
+
+    <h3>As an Actor</h3>
+    <div class="row mb-4">
+        <div class="col-md-12">
+            <p class="lead">{{ biography.movie_career_actor }}</p>
+        </div>
+    </div>
+
+    <h3>As a Producer</h3>
+    <div class="row mb-4">
+        <div class="col-md-12">
+            <p class="lead">{{ biography.movie_career_producer }}</p>
+        </div>
+    </div>
+
+    <h3>As a Director</h3>
+    <div class="row mb-4">
+        <div class="col-md-12">
+            <p class="lead">{{ biography.movie_career_director }}</p>
+        </div>
+    </div>
+
+</div>
+{% endblock %}

@@ -40,16 +40,43 @@
         </div>
     </div>
 
+  <!-- Latest Movies Section -->
+<h2>Latest Movies</h2>
+<div class="row">
+    {% for movie in latest_movies %}
+    <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+        <div class="card h-100">
+            <img src="{{ movie.image.url }}" class="card-img-top" alt="{{ movie.title }}" style="height: 300px; object-fit: cover;">
+            <div class="card-body">
+                <h5 class="card-title">{{ movie.title }}</h5>
+                <p class="card-text">{{ movie.status_display }} : {{ movie.release_date }}</p>
+                <a href="{% url 'movie_detail' movie.pk %}" class="btn btn-primary stretched-link">View Movie</a>
+            </div>
+        </div>
+    </div>
+    {% empty %}
+    <div class="col-md-4 mb-4">
+        <div class="card h-100">
+            <div class="card-img-top bg-secondary" style="height: 300px;"></div>
+            <div class="card-body">
+                <h5 class="card-title">No movies available</h5>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+
    <!-- Latest Movies Section -->
-   <h2>Latest Movies</h2>
+   <h2>Upcoming Movies</h2>
    <div class="row">
-       {% for movie in latest_movies %}
-       <div class="col-md-4 mb-4">
-           <div class="card h-100">
-               <img src="{{ movie.poster.url }}" class="card-img-top" alt="{{ movie.title }}" style="height: 300px; object-fit: cover;">
+       {% for movie in upcoming_movies %}
+       <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+        <div class="card h-100">
+               <img src="{{ movie.image.url }}" class="card-img-top" alt="{{ movie.title }}" style="height: 300px; object-fit: cover;">
                <div class="card-body">
                    <h5 class="card-title">{{ movie.title }}</h5>
-                   <p class="card-text">Release Date: {{ movie.release_date }}</p>
+                   <p class="card-text">{{movie.status_display}} : {{ movie.release_date }}</p>
                    <a href="{% url 'movie_detail' movie.pk %}" class="btn btn-primary stretched-link">View Movie</a>
                </div>
            </div>
@@ -87,30 +114,7 @@
         {% endfor %}
     </ul>
 
-    <!-- Related Links Section -->
-    <h2>Related Links</h2>
-    <ul class="list-group mb-4">
-        {% for link in related_links %}
-        <li class="list-group-item">
-            <a href="{{ link.url }}" target="_blank">{{ link.title }}</a>
-        </li>
-        {% empty %}
-        <li class="list-group-item">No related links available</li>
-        {% endfor %}
-    </ul>
-
-    <!-- Recent News Section -->
-    <h2>Recent News</h2>
-    <div class="list-group">
-        {% for article in recent_news %}
-        <a href="{% url 'news_list' %}" class="list-group-item list-group-item-action">
-            <h5 class="mb-1">{{ article.title }}</h5>
-            <p class="mb-1">Published on: {{ article.publication_date }}</p>
-            <p>{{ article.summary }}</p>
-        </a>
-        {% empty %}
-        <p>No news available.</p>
-        {% endfor %}
-    </div>
+  
+  
 </div>
 {% endblock %}

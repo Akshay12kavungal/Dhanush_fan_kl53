@@ -15,7 +15,7 @@
         <div class="col-md-8">
             <h2>{{ movie.title }}</h2>
             <p class="lead">{{ movie.description }}</p>
-            <p><strong>Release Date:</strong> {{ movie.release_date }}</p>
+            <p><strong>{{movie.status_display}}:</strong> {{ movie.release_date }}</p>
             {% if movie.trailer_link %}
             <a href="{{ movie.trailer_link }}" class="btn btn-primary">Watch Trailer</a>
             {% endif %}

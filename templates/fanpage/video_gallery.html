@@ -3,13 +3,25 @@
 {% block title %}Video Gallery{% endblock %}
 
 {% block content %}
-<h1>Video Gallery</h1>
-<ul>
-    {% for video in videos %}
-    <li>
-        <a href="{{ video.video_link }}">{{ video.title }}</a>
-        <p>{{ video.description }}</p>
-    </li>
-    {% endfor %}
-</ul>
+<div class="container mt-4">
+    <h1 class="mb-4">Video Gallery</h1>
+    <ul class="list-group">
+        {% for video in videos %}
+        <li class="list-group-item mb-3">
+            <h3><a href="{{ video.video_link }}" class="text-decoration-none">{{ video.title }}</a></h3>
+            {% if video.video_file %}
+            <div class="embed-responsive embed-responsive-16by9 mb-2">
+                <video class="embed-responsive-item" controls>
+                    <source src="{{ video.video_file.url }}" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+            {% else %}
+            <p>Video file not available.</p>
+            {% endif %}
+            <p>{{ video.description }}</p>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
 {% endblock %}

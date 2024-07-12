@@ -1,21 +1,14 @@
 from django.contrib import admin
 
-from .models import Award, Biography, Filmography, Movie, MovieList, NewsArticle, Photo,Comment, RelatedLinks, Video
+from .models import Award, Biography, Filmography, Movie, NewsArticle, Photo,Comment, RelatedLinks, Video
 
 # Register your models here.
 
 @admin.register(Movie)
 class MoviesAdmin(admin.ModelAdmin):
-    list_display=('title','release_date','poster','description','upcoming','trailer_link')
-    search_fields=('title','release_date','upcoming')
-    list_filter=('title','release_date','upcoming')
-
-@admin.register(MovieList)
-class MovieListAdmin(admin.ModelAdmin):
-    list_display=('title','year','image','description')
-    search_fields=('title','year')
-    list_filter=('title','year')
-
+    list_display=('title','release_date','image','description','status','trailer_link')
+    search_fields=('title','release_date','upcoming','status')
+    list_filter=('title','release_date','status')
 
 
 @admin.register(NewsArticle)

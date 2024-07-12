@@ -8,13 +8,14 @@
 
     <div class="row">
         {% for movie in upcoming_movies %}
-        <div class="col-md-4 mb-4">
+        <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
             <div class="card h-100">
                 <img src="{{ movie.image.url }}" class="card-img-top" alt="{{ movie.title }}" style="height: 300px; object-fit: cover;">
                 <div class="card-body">
                     <h5 class="card-title">{{ movie.title }}</h5>
-                    <p class="card-text">Release Date: {{ movie.release_date }}</p>
-                    <p class="card-text">{{ movie.description }}</p>
+                    <p class="card-text">{{movie.status_display}}:{{ movie.release_date }}</p>
+                    <p class="card-text">{{ movie.description|truncatewords:30 }}</p>
+                    <a href="{% url 'movie_detail' movie.pk %}" class="btn btn-primary">Read More</a>
                 </div>
             </div>
         </div>

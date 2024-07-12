@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Award, Biography, Filmography, Movie, NewsArticle, Photo,Comment, RelatedLinks, Video
+from .models import Award, Biography, Filmography, Movie, Photo,Comment, Video
 
 # Register your models here.
 
@@ -11,12 +11,6 @@ class MoviesAdmin(admin.ModelAdmin):
     list_filter=('title','release_date','status')
 
 
-@admin.register(NewsArticle)
-class NewsArticleAdmin(admin.ModelAdmin):
-    list_display=('title','publication_date','summary','read_more_link')
-    search_fields=('title','publication_date')
-    list_filter=('title','publication_date')
-
 @admin.register(Photo)
 class PhotoAdmin(admin.ModelAdmin):
     list_display=('title','image','description')
@@ -25,7 +19,7 @@ class PhotoAdmin(admin.ModelAdmin):
 
 @admin.register(Video)
 class VideoAdmin(admin.ModelAdmin):
-    list_display=('title','video_link','description')
+    list_display=('title','video_link','video_file','description')
     search_fields=('title',)
     list_filter=('title',)
 
@@ -53,7 +47,3 @@ class AwardAdmin(admin.ModelAdmin):
     list_display = ('title',)
     search_fields = ('title',)
 
-@admin.register(RelatedLinks)
-class RelatedLinksAdmin(admin.ModelAdmin):
-    list_display = ('title', 'url')
-    search_fields = ('title',)

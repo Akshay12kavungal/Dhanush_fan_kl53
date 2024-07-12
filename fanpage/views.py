@@ -1,7 +1,7 @@
 from django.utils import timezone 
 from django.shortcuts import redirect, render
 
-from .models import Award, Biography, Filmography, Movie, NewsArticle,Photo, RelatedLinks, Video, Comment
+from .models import Award, Biography, Filmography, Movie,Photo, Video, Comment
 
 # Create your views here.
 
@@ -10,23 +10,21 @@ def home(request):
  
     biography = Biography.objects.first()
 
-    filmography = Filmography.objects.all().order_by('year')[:5]
+    filmography = Filmography.objects.all().order_by('-year')[:5]
     
     awards = Award.objects.all()[:5]
-    
-    related_links = RelatedLinks.objects.all()[:5]
-    
-    latest_movies = Movie.objects.order_by('-release_date')[:5]
-    
-    recent_news = NewsArticle.objects.order_by('-publication_date')[:5]
+
+    latest_movies =  Movie.objects.filter(status='released').order_by('-release_date')[:4]
+
+    upcoming_movies =  Movie.objects.filter(status='upcoming').order_by('-release_date')[:4]
     
     context = {
         'biography': biography,
         'filmography': filmography,
         'awards': awards,
-        'related_links': related_links,
         'latest_movies': latest_movies,
-        'recent_news': recent_news,
+        'upcoming_movies':upcoming_movies
+       
     }
     return render(request, 'fanpage/home.html', context)
 
@@ -64,9 +62,6 @@ def awards(request):
     return render(request,'fanpage/awards.html',{'awards':awards})
 
 
-def news_list(request):
-    news_articles=NewsArticle.objects.order_by('-publication_date')
-    return render(request,'fanpage/news_list.html',{'news_articles': news_articles})
 
 
 def photo_gallery(request):

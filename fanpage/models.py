@@ -4,28 +4,25 @@ from django.db import models
 
 class Movie(models.Model):
     STATUS_CHOICES = [
-        ('released', 'Released'),
-        ('upcoming', 'Upcoming'),
+        ('released', 'Released Movie'),
+        ('upcoming', 'Upcoming Movie'),
     ]
 
     title = models.CharField(max_length=200)
     release_date = models.DateField()
-    image = models.ImageField(upload_to='posters/')
+    image = models.ImageField(upload_to='images/')
     description = models.TextField()
     trailer_link = models.URLField(blank=True)
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='released')
 
     def __str__(self):
         return self.title
+    
+    @property
+    def status_display(self):
+        return self.get_status_display().capitalize()
 
-class NewsArticle(models.Model):
-    title=models.CharField(max_length=200)
-    publication_date=models.DateField()
-    summary=models.TextField()
-    read_more_link=models.URLField(blank=True)
 
-    def __str__(self):
-        return self.title
     
 class Photo(models.Model):
     title=models.CharField(max_length=200)
@@ -39,6 +36,7 @@ class Photo(models.Model):
 class Video(models.Model):
     title=models.CharField(max_length=200)
     video_link=models.URLField()
+    video_file = models.FileField(upload_to='videos/', blank=True)
     description=models.TextField(blank=True)
 
     def __str__(self):
@@ -88,9 +86,3 @@ class Award(models.Model):
     def __str__(self):
         return self.title
 
-class RelatedLinks(models.Model):
-    title = models.CharField(max_length=200)
-    url = models.URLField()
-    
-    def __str__(self):
-        return self.title

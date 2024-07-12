@@ -2,25 +2,66 @@
 
 {% block title %}Fan Comments{% endblock %}
 
+{% block extra_css %}
+<style>
+    .comment-text {
+        white-space: pre-line; /* Preserve line breaks in comments */
+    }
+    .table-container {
+        margin-top: 20px;
+    }
+</style>
+{% endblock %}
+
 {% block content %}
-<h1>Fan Comments</h1>
-<ul>
-    {% for comment in comments %}
-    <li>
-        {{ comment.author }} - {{ comment.created_date }} <br> {{ comment.text }}
-    </li>
-    {% endfor %}
-</ul>
-<form method="post">
-    {% csrf_token %}
-    <div class="form-group">
-        <label for="author">Name:</label>
-        <input type="text" name="author" id="author" class="form-control">
+<div class="container mt-4">
+    <h1 class="mb-4">Fan Comments</h1>
+    
+    {% if comments %}
+    <div class="table-container">
+        <table class="table table-striped table-hover">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Comment</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for comment in comments %}
+                <tr>
+                    <td>{{ comment.author }}</td>
+                    <td>{{ comment.created_date }}</td>
+                    <td class="comment-text">{{ comment.text }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
     </div>
-    <div class="form-group">
-        <label for="text">Comment:</label>
-        <textarea name="text" id="text" class="form-control"></textarea>
+    {% else %}
+    <div class="alert alert-info mt-4" role="alert">
+        No comments yet. Be the first to leave a comment!
     </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
-</form>
+    {% endif %}
+
+    <div class="card mt-4">
+        <div class="card-header">
+            <h3>Leave a Comment</h3>
+        </div>
+        <div class="card-body">
+            <form method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="author">Name:</label>
+                    <input type="text" name="author" id="author" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="text">Comment:</label>
+                    <textarea name="text" id="text" class="form-control" rows="5" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
 {% endblock %}

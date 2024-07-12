@@ -35,6 +35,9 @@ def biography(request):
     biography = Biography.objects.first()
     return render(request, 'fanpage/biography.html', {'biography': biography})
 
+def upcoming_movies(request):
+    upcoming_movies = Movie.objects.filter(upcoming=True).order_by('release_date')
+    return render(request, 'fanpage/upcoming_movies.html', {'upcoming_movies': upcoming_movies})
 
 def movie_list(request):
     movie_lists = MovieList.objects.all().order_by('-year',)
@@ -43,9 +46,22 @@ def movie_list(request):
     }
     return render(request, 'fanpage/movie_list.html', context)
 
+def latest_movie(request):
+    latest=Movie.objects.order_by('-release_date')
+    context={
+        'latest':latest
+    }
+    return render(request,'fanpage/latest_movies.html',context)
+    
+
 def movie_detail(request,pk):
     movie=Movie.objects.get(pk=pk)
     return render(request,'fanpage/movie_detail.html',{'movie':movie})
+
+
+def awards(request):
+    awards=Award.objects.all()
+    return render(request,'fanpage/awards.html',{'awards':awards})
 
 
 def news_list(request):
@@ -55,7 +71,12 @@ def news_list(request):
 
 def photo_gallery(request):
     photos=Photo.objects.all()
-    return render(request,'fanpage/photo_gallery.html',{'photos':photos})
+    movie_list=MovieList.objects.all()
+    context={
+        'photos':photos,
+        'movie_list':movie_list
+    }
+    return render(request,'fanpage/photo_gallery.html',context)
 
 
 def video_gallery(request):
@@ -71,5 +92,5 @@ def comments(request):
             comment = Comment(author=author, text=text, created_date=timezone.now())  # Use timezone.now()
             comment.save()
             return redirect('comments')
-    comments = Comment.objects.order_by('-created_date')
+    comments = Comment.objects.order_by('-created_date')[:5]
     return render(request, 'fanpage/comments.html', {'comments': comments})

@@ -1,0 +1,29 @@
+{% extends 'fanpage/base.html' %}
+
+{% block title %}Awards - Dhanush Fan KL53{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Awards</h2>
+    <div class="row">
+        {% for award in awards %}
+        <div class="col-md-6 mb-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">{{ award.title }}</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">{{ award.category }}</h6>
+                    <p class="card-text">{{ award.description }}</p>
+                    <p class="card-text"><strong>Year:</strong> {{ award.year }}</p>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="col-md-12">
+            <div class="alert alert-info" role="alert">
+                No awards available at the moment.
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

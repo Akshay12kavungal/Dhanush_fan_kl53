@@ -12,12 +12,6 @@
                 <img src="{{ photo.image.url }}" class="card-img-top" alt="{{ photo.title }}" style="height: 300px; object-fit: cover;">
             </div>
         </div>
-        {% empty %}
-        <div class="col-md-12">
-            <div class="alert alert-info" role="alert">
-                No photos available at the moment.
-            </div>
-        </div>
         {% endfor %}
     
     {% for photos in movie_list %}

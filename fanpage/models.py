@@ -2,27 +2,22 @@ from django.db import models
 
 # Create your models here.
 
-
 class Movie(models.Model):
-    title=models.CharField(max_length=200)
-    release_date=models.DateField()
-    poster=models.ImageField(upload_to='posters/')
-    description=models.TextField()
-    trailer_link=models.URLField(blank=True)
-    upcoming = models.BooleanField(default=False) 
+    STATUS_CHOICES = [
+        ('released', 'Released'),
+        ('upcoming', 'Upcoming'),
+    ]
 
-    def __str__(self):
-        return self.title
-    
-class MovieList(models.Model):
     title = models.CharField(max_length=200)
-    year=models.DateField()
-    description = models.TextField(blank=False)
-    image = models.ImageField(upload_to='movie_lists/', blank=True, null=True)
+    release_date = models.DateField()
+    image = models.ImageField(upload_to='posters/')
+    description = models.TextField()
+    trailer_link = models.URLField(blank=True)
+    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='released')
 
     def __str__(self):
         return self.title
-    
+
 class NewsArticle(models.Model):
     title=models.CharField(max_length=200)
     publication_date=models.DateField()

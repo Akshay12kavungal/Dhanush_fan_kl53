@@ -1,7 +1,7 @@
 from django.utils import timezone 
 from django.shortcuts import redirect, render
 
-from .models import Award, Biography, Filmography, Movie, MovieList, NewsArticle,Photo, RelatedLinks, Video, Comment
+from .models import Award, Biography, Filmography, Movie, NewsArticle,Photo, RelatedLinks, Video, Comment
 
 # Create your views here.
 
@@ -36,18 +36,18 @@ def biography(request):
     return render(request, 'fanpage/biography.html', {'biography': biography})
 
 def upcoming_movies(request):
-    upcoming_movies = Movie.objects.filter(upcoming=True).order_by('release_date')
+    upcoming_movies =  Movie.objects.filter(status='upcoming').order_by('-release_date')
     return render(request, 'fanpage/upcoming_movies.html', {'upcoming_movies': upcoming_movies})
 
 def movie_list(request):
-    movie_lists = MovieList.objects.all().order_by('-year',)
+    movie_lists = Movie.objects.all().order_by('-release_date',)
     context = {
         'movie_lists': movie_lists
     }
     return render(request, 'fanpage/movie_list.html', context)
 
 def latest_movie(request):
-    latest=Movie.objects.order_by('-release_date')
+    latest=Movie.objects.filter(status='released').order_by('-release_date')
     context={
         'latest':latest
     }
@@ -71,7 +71,7 @@ def news_list(request):
 
 def photo_gallery(request):
     photos=Photo.objects.all()
-    movie_list=MovieList.objects.all()
+    movie_list=Movie.objects.all()
     context={
         'photos':photos,
         'movie_list':movie_list

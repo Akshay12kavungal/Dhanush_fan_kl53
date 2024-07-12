@@ -10,6 +10,7 @@ urlpatterns =[
     path('photos/', views.photo_gallery, name='photo_gallery'),
     path('videos/', views.video_gallery, name='video_gallery'),
     path('comments/', views.comments, name='comments'),
+    path('biography/', views.biography, name='biography'), 
 
 
 ]

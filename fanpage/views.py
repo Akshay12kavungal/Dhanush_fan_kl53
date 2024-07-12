@@ -10,11 +10,11 @@ def home(request):
  
     biography = Biography.objects.first()
 
-    filmography = Filmography.objects.all().order_by('year')
+    filmography = Filmography.objects.all().order_by('year')[:5]
     
-    awards = Award.objects.all()
+    awards = Award.objects.all()[:5]
     
-    related_links = RelatedLinks.objects.all()
+    related_links = RelatedLinks.objects.all()[:5]
     
     latest_movies = Movie.objects.order_by('-release_date')[:5]
     
@@ -30,8 +30,14 @@ def home(request):
     }
     return render(request, 'fanpage/home.html', context)
 
+
+def biography(request):
+    biography = Biography.objects.first()
+    return render(request, 'fanpage/biography.html', {'biography': biography})
+
+
 def movie_list(request):
-    movie_lists = MovieList.objects.all()
+    movie_lists = MovieList.objects.all().order_by('-year',)
     context = {
         'movie_lists': movie_lists
     }

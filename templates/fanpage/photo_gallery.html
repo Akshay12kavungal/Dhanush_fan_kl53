@@ -19,6 +19,13 @@
             </div>
         </div>
         {% endfor %}
+    
+    {% for photos in movie_list %}
+    <div class="col-md-4 mb-4">
+        <div class="card h-100">
+            <img src="{{ photos.image.url }}" class="card-img-top" alt="{{ photos.title }}" style="height: 300px; object-fit: cover;">
+        </div>
     </div>
+    {% endfor %}
 </div>
 {% endblock %}

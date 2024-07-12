@@ -1,0 +1,33 @@
+{% extends 'fanpage/base.html' %}
+
+{% block title %}Upcoming Movies{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1 class="mb-4">Upcoming Movies</h1>
+
+    <div class="row">
+        {% for movie in upcoming_movies %}
+        <div class="col-md-4 mb-4">
+            <div class="card h-100">
+                <img src="{{ movie.poster.url }}" class="card-img-top" alt="{{ movie.title }}" style="height: 300px; object-fit: cover;">
+                <div class="card-body">
+                    <h5 class="card-title">{{ movie.title }}</h5>
+                    <p class="card-text">Release Date: {{ movie.release_date }}</p>
+                    <p class="card-text">{{ movie.description }}</p>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="col-md-4 mb-4">
+            <div class="card h-100">
+                <div class="card-img-top bg-secondary" style="height: 300px;"></div>
+                <div class="card-body">
+                    <h5 class="card-title">No upcoming movies</h5>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

@@ -6,9 +6,9 @@ from .models import Award, Biography, Filmography, Movie, MovieList, NewsArticle
 
 @admin.register(Movie)
 class MoviesAdmin(admin.ModelAdmin):
-    list_display=('title','release_date','poster','description','trailer_link')
-    search_fields=('title','release_date')
-    list_filter=('title','release_date')
+    list_display=('title','release_date','poster','description','upcoming','trailer_link')
+    search_fields=('title','release_date','upcoming')
+    list_filter=('title','release_date','upcoming')
 
 @admin.register(MovieList)
 class MovieListAdmin(admin.ModelAdmin):

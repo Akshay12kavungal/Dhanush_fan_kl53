@@ -9,6 +9,7 @@ class Movie(models.Model):
     poster=models.ImageField(upload_to='posters/')
     description=models.TextField()
     trailer_link=models.URLField(blank=True)
+    upcoming = models.BooleanField(default=False) 
 
     def __str__(self):
         return self.title
@@ -81,10 +82,20 @@ class Filmography(models.Model):
     role = models.CharField(max_length=200)
     description = models.TextField()
 
+    def __str__(self):
+        return self.title
+
 class Award(models.Model):
-    title = models.CharField(max_length=200)
-    description = models.TextField()
+    title = models.CharField(max_length=200, default='Award Title')
+    description = models.TextField(default='Description of the award.')
+    year = models.DateField(default='2024-01-01')  # Default date example, adjust as needed
+
+    def __str__(self):
+        return self.title
 
 class RelatedLinks(models.Model):
     title = models.CharField(max_length=200)
     url = models.URLField()
+    
+    def __str__(self):
+        return self.title

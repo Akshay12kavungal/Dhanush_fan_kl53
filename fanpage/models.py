@@ -25,7 +25,7 @@ class Movie(models.Model):
 
     
 class Photo(models.Model):
-    title=models.CharField(max_length=200)
+    title=models.CharField(max_length=200,blank=True)
     image=models.ImageField(upload_to='photos/')
     description=models.TextField(blank=True)
 
@@ -79,9 +79,13 @@ class Filmography(models.Model):
         return self.title
 
 class Award(models.Model):
-    title = models.CharField(max_length=200, default='Award Title')
-    description = models.TextField(default='Description of the award.')
-    year = models.DateField(default='2024-01-01')  # Default date example, adjust as needed
+    title = models.CharField(max_length=200, default='')
+    year = models.IntegerField()
+    category=models.CharField(max_length=200, default='')
+    film = models.CharField(max_length=200, default='')
+    image = models.ImageField(upload_to='Awards/',blank=True)
+
+    
 
     def __str__(self):
         return self.title

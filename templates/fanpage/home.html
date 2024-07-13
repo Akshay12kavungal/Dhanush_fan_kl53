@@ -103,16 +103,21 @@
         <li class="list-group-item">No films listed</li>
         {% endfor %}
     </ul>
-
+     <div>
+     <a href="{% url 'movie_list' %}" class="btn btn-primary stretched-link">View Movies</a>
+     </div><br>
     <!-- Awards Section -->
     <h2>Awards and Recognition</h2>
     <ul class="list-group mb-4">
         {% for award in awards %}
-        <li class="list-group-item">{{ award.title }}</li>
+        <li class="list-group-item">{{ award.title }}-{{award.film}}-{{ award.category }}-{{ award.year }}</li>
+       
+
         {% empty %}
         <li class="list-group-item">No awards listed</li>
         {% endfor %}
     </ul>
+    <a href="{% url 'awards' %}" class="btn btn-primary stretched-link">View More</a>
 
   
   

@@ -44,6 +44,6 @@ class FilmographyAdmin(admin.ModelAdmin):
 
 @admin.register(Award)
 class AwardAdmin(admin.ModelAdmin):
-    list_display = ('title',)
-    search_fields = ('title',)
+    list_display = ('title','year','category','film','image')
+    search_fields = ('title','year','category')
 

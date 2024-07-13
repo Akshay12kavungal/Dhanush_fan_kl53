@@ -7,12 +7,13 @@
     <h2>Awards</h2>
     <div class="row">
         {% for award in awards %}
-        <div class="col-md-6 mb-4">
+        <div class="col-lg-4 col-md-4 col-sm-6 mb-4">
             <div class="card h-100">
+                <img src="{{ award.image.url }}" class="card-img-top" alt="{{ award.title }}" style="height: 300px; object-fit: cover;">
                 <div class="card-body">
                     <h5 class="card-title">{{ award.title }}</h5>
                     <h6 class="card-subtitle mb-2 text-muted">{{ award.category }}</h6>
-                    <p class="card-text">{{ award.description }}</p>
+                    <p class="card-text">{{ award.film }}</p>
                     <p class="card-text"><strong>Year:</strong> {{ award.year }}</p>
                 </div>
             </div>

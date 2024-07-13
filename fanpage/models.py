@@ -35,7 +35,7 @@ class Photo(models.Model):
 
 class Video(models.Model):
     title=models.CharField(max_length=200)
-    video_link=models.URLField()
+    video_link=models.URLField(blank=True)
     video_file = models.FileField(upload_to='videos/', blank=True)
     description=models.TextField(blank=True)
 

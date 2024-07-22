@@ -62,6 +62,7 @@ class Biography(models.Model):
     movie_career_producer = models.TextField(default='Movie career as a producer content here.')
     movie_career_director = models.TextField(default='Movie career as a director content here.')
     image = models.ImageField(upload_to='Biography/', default='default_biography_image.jpg')
+    profile=models.ImageField(upload_to='Biography/', default='default_biography_image2.jpg')
 
     def __str__(self):
         return self.title
